@@ -130,5 +130,8 @@ dmypy.json
 mister.json.bak
 retroarch.json.bak
 config.json
+main.spec
+DatabaseManager.spec
+DatabaseTool.spec
 release/
 .vscode

@@ -8,6 +8,7 @@ from os.path import exists
 import json
 from fuzzywuzzy import process
 import logger
+
 SETTINGS = config.get_config()
 
 fuzzy_match_threshold = SETTINGS['main']['fuzzy_match_threshold']
