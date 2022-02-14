@@ -20,7 +20,7 @@ if os.path.exists("version.json"):
         version = version_json['version']
 
 date = datetime.datetime.now().strftime("%Y%m%d")
-filename = os.path.join("release",f"GameEventHub{version}_{date}")
+filename = os.path.join("release",f"GameEventHub_{version}_{date}")
 
 #os.system('pyinstaller main.spec -i icon.ico -n test --clean -y  --add-data "templates;templates" --add-data "static;static"')
 PyInstaller.__main__.run(['.\main.spec','--onefile','--clean'])
