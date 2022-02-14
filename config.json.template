@@ -2,7 +2,8 @@
     "main":{
         "debug":false,
         "images_folder":"C:\\path\\to\\art",
-        "fuzzy_match_images":true
+        "fuzzy_match_images":true,
+        "fuzzy_match_threshold": 90
     },
     "mister": {
         "ipaddress": "MiSTer",

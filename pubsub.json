@@ -47,7 +47,21 @@
                                 "Snap": "snap",
                                 "System": "system"
                             }
-                        }
+                        },
+                        {
+                            "description":"Set the volume for the core",
+                            "status":"enabled",
+                            "action":"ObsSetSourceVolume",
+                            "source":"LiveGamer",
+                            "volume":"-12"
+                          },
+                          {
+                            "description":"Set the volume for the core",
+                            "status":"enabled",
+                            "action":"ObsSetBrowserSourceUrl",
+                            "source":"Browser",
+                            "url":"https://www.google.com"
+                          }
                     ]
                 },
                 {

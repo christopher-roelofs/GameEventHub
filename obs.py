@@ -96,19 +96,19 @@ def setBrowserSourceUrl(name, url):
     try:
         logger.event(
             'Changing browser source url of "{}" to "{}"'.format(name, url))
-        obs_call(requests.SetBrowserSourceProperties(sourceName=name, url=url))
+        obs_call(requests.SetBrowserSourceProperties(name, url=url))
     except Exception as e:
         logger.error(
-            "Unable to set source image for {}: {}".format(name, repr(e)))
+            "Unable to set source url for {}: {}".format(name, repr(e)))
 
 
-def setSourceVolume(name, volume):
+def setSourceVolume(name, volume,useDecibel=True):
     try:
-        logger.event(f'Changing source volume to "{volume}"')
-        obs_call(requests.SetVolume(name, volume))
+        logger.event(f'Changing volume of {name} to {volume}')
+        obs_call(requests.SetVolume(name, volume,useDecibel))
     except Exception as e:
         logger.error(
-            f"Unable to set source property {property} for {name}: {e}")
+            f"Unable to set volume of {name} to {volume}: {e}")
 
 
 def setSceneItemProperty(name, property, value):
@@ -182,9 +182,9 @@ def handle_event(event, action):
 
         if action['action'] == "ObsSetBrowserSourceUrl":
             source = replace_text(action["source"], event.tokens)
-            url = replace_text(action["volume"], event.tokens)
+            url = replace_text(action["url"], event.tokens)
             if is_in_source_list(source):
-                threading.Thread(target=setSourceVolume,
+                threading.Thread(target=setBrowserSourceUrl,
                                  args=[source, url]).start()
             else:
                 logger.error(f"Source {source} not found")
@@ -192,11 +192,19 @@ def handle_event(event, action):
         if action['action'] == "ObsSetSourceVolume":
             source = replace_text(action["source"], event.tokens)
             volume = replace_text(action["volume"], event.tokens)
-            if is_in_source_list(source):
-                threading.Thread(target=setSourceVolume, args=[
-                                 source, volume]).start()
-            else:
-                logger.error(f"Source {source} not found")
+            use_db = True
+            if "type" in action:
+                if action["type"] != "db":
+                    use_db = False
+
+            try:
+                if is_in_source_list(source):
+                    threading.Thread(target=setSourceVolume, args=[
+                                    source, float(volume),use_db]).start()
+                else:
+                    logger.error(f"Source {source} not found")
+            except Exception as e:
+                 logger.error(f"Unable to set volume of {source} to {volume}: {e}")
 
         if action['action'] == "ObsSetItemProperty":
             source = replace_text(action["source"], event.tokens)
