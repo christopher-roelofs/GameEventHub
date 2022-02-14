@@ -614,3 +614,21 @@ In this example, the game details will be written to details.txt in a a specific
 }
 ```
 
+**The following files are independent of the main program and need to be copied to the scripts folder on the MiSTer and run manually.**
+
+**splitcores.py** - This is used for cores that have multiples systems ie SMS can play Game Gear and SG1000 games. You can use this to create copies of those rbf files named differently so you can have different scenes.
+
+**splitcores.json** - This is used to setup which cores you will copy.
+
+```json
+{
+    "SMS": ["GAMEGEAR","SG-1000"],
+    "ColecoVision": ["SG-1000C"],
+    "Gameboy": ["GBC"],
+    "Turbografx16": ["TGFX-CD"]
+}
+```
+
+**splitcores.sh** - Copy this to the scripts folder on the MiSTer to run the splitcores.py script.
+
+**update_and_copy.sh** - Copy this to the scripts folder on the MiSTer to run the update_all script and then run the splitcores.py script
