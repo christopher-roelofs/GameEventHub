@@ -470,7 +470,7 @@ This actions allows you to change a property of a source based on an event.  The
 
 ObsSetSourceVolume
 
-This actions allows you to change the volume of a source based on an event. This action can use {tokens} for dynamic source names. Volume is in db and is a float (needs t be a string in json). you can add a "type" field and set it to "amp" ie "type":"amp" to use amplitude/mul.
+This actions allows you to change the volume of a source based on an event. This action can use {tokens} for dynamic source names. Volume is in db and is a float (needs t be a string in json). you can add a "type" field and set it to "amp" ie "type":"amp" to use amplitude/mul. Must be between 0.0 and 20.0 for mul, and under 26.0 for dB. OBS will interpret dB values under -100.0 as Inf. Note: The OBS volume sliders only reach a maximum of 1.0mul/0.0dB, however OBS actually supports larger values.
 
 ```json
 {
