@@ -384,11 +384,11 @@ This event is triggered when a game is changed
 
 ## [OBS](https://obsproject.com/)
 
-
-
 OBS Studio is a free, open-source, and cross-platform screencasting and streaming app. It is available for Windows, macOS, Linux distributions, and BSD.
 
 you need to install obs-websocket which can be found here: [https://github.com/Palakis/obs-websocket/releases](https://github.com/Palakis/obs-websocket/releases).
+
+** Note! The OBS subscriber currently only supports obs-websocket v4.x.x ****
 
 ![image](https://user-images.githubusercontent.com/1930031/153928910-79a8aab7-4f48-4724-b51d-8f09e6074a22.png)
 
