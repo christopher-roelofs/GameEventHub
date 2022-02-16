@@ -56,7 +56,7 @@
                             "volume":"-12"
                           },
                           {
-                            "description":"Set the volume for the core",
+                            "description":"Set the url for a browser source",
                             "status":"enabled",
                             "action":"ObsSetBrowserSourceUrl",
                             "source":"Browser",
@@ -99,7 +99,14 @@
                             "source": "System",
                             "property": "visible",
                             "value": true
-                        }
+                        },
+                        {
+                            "description":"Set the url for a browser source",
+                            "status":"enabled",
+                            "action":"ObsSetBrowserSourceUrl",
+                            "source":"Browser",
+                            "url":"{reference_url}"
+                          }
                     ]
                 },
                 {

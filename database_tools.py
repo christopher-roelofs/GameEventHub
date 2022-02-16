@@ -74,7 +74,7 @@ def import_patch2(file):
         index = 1
         for item in data:
             query = Query()
-            result = database.search((query.release_name == item["release_name"]) & (query.rom_extensionless_file_name == item["rom_extensionless_file_name"]))
+            result = database.search((query.release_name == item["release_name"]) & (query.rom_extensionless_file_name == item["rom_extensionless_file_name"]) & (query.system == item["system"]))
             if len(result) < 1:
                 database.upsert({"uuid": item['uuid'], "release_name": item['release_name'], "region": item['region'], "system": item['system'], "sha1": item['sha1'], "rom_extensionless_file_name": item['rom_extensionless_file_name'], "developer": item['developer'], "publisher": item['publisher'], "genre": item['genre'],
                                 "date": item['date'], "description": item["description"], "reference_url": item["reference_url"], "manual_url": item["manual_url"]}, (query.sha1 == item["sha1"]) & (query.release_name == item["release_name"]) & (query.rom_extensionless_file_name == item["rom_extensionless_file_name"]))
