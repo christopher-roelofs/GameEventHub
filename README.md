@@ -90,6 +90,9 @@ The database used is a slimmed down and modified version of the [OpenVGDB](https
 
 The database manager allows you to edit and add new records to the database.
 
+![image](https://user-images.githubusercontent.com/1930031/153929043-f7e45342-d802-4faf-acbd-b4dcf05c1f9a.png)
+
+
 -   To create a new record make sure the fields have been cleared. add your new record details and click submit.
 -   To edit a record, select the record from the table, edit the fields and then submit.
 -   To create a new record based on an existing record, select the record from the table, click duplicate, edit the fields and then submit. A new record with a new uuid will be created. The new record should have a different sha1 or rom name or you will get an error and the record will not be created. 
@@ -385,6 +388,11 @@ OBS Studio is a free, open-source, and cross-platform screencasting and streamin
 
 you need to install obs-websocket which can be found here: [https://github.com/Palakis/obs-websocket/releases](https://github.com/Palakis/obs-websocket/releases).
 
+**Note! The OBS subscriber currently only supports obs-websocket v4.x.x**
+
+![image](https://user-images.githubusercontent.com/1930031/153928910-79a8aab7-4f48-4724-b51d-8f09e6074a22.png)
+
+
   Config | Example  | Details   |
 | ------------ | ------------ | ------------ |
 | host  |  localhost  | obs websocket host/ip address  |
@@ -400,6 +408,8 @@ OBS Config
         "password": ""
     }
 ```
+
+**Actions**
 
 ObsChangeScene
 
@@ -460,7 +470,7 @@ This actions allows you to change a property of a source based on an event.  The
 
 ObsSetSourceVolume
 
-This actions allows you to change the volume of a source based on an event. This action can use {tokens} for dynamic source names. Volume is in db and is a float (needs t be a string in json). you can add a "type" field and set it to "amp" ie "type":"amp" to use amplitude/mul.
+This actions allows you to change the volume of a source based on an event. This action can use {tokens} for dynamic source names. Volume is in db and is a float (needs t be a string in json). you can add a "type" field and set it to "amp" ie "type":"amp" to use amplitude/mul. Must be between 0.0 and 20.0 for mul, and under 26.0 for dB. OBS will interpret dB values under -100.0 as Inf. Note: The OBS volume sliders only reach a maximum of 1.0mul/0.0dB, however OBS actually supports larger values.
 
 ```json
 {
@@ -486,9 +496,10 @@ This action allows you to set the url of a browser source. The url and source va
 }
 ```
 
-**Actions**
-
 ## [Discord Rich Presense](https://discord.com/developers/docs/intro)
+
+![image](https://user-images.githubusercontent.com/1930031/153929599-6ceeb88a-c99e-47cb-9f7b-aa75468b6e49.png)
+
 
 For the Discord subcriber to work, you need to have the discord application install on the same machine the script is running on. This uses the RPC protocol.
 
@@ -559,6 +570,9 @@ Discord subscriber only has one action so it does not need to be defined. State 
 ## Webapp Dashboard
 
 This is a simple webserver that will show the game and details. It is a live dashboard. This is a work in progress and is a little rough
+
+![image](https://user-images.githubusercontent.com/1930031/153929170-cc023a9c-f4c2-4394-8f7c-d6c0ebbe2628.png)
+
 
 Dashboard Config
 
