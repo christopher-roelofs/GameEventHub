@@ -54,9 +54,43 @@ class MisterGameChange():
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
 
+def initialize():
+    global connected
+    global ssh_session
+    global retries
+    if retries < max_retries:
+        try:
+            ipaddress = SETTINGS['mister']['ipaddress']
+            username = SETTINGS['mister']['username']
+            password = SETTINGS['mister']['password']
+            port = SETTINGS['mister']['port']
+            ssh_session = ssh.SshConnection(ipaddress,port,username,password)
+            ssh_session.connect()
+            logger.info("Connected to MiSTer")
+            merge_maps()
+            load_map_to_memory()
+            connected = True
+        except Exception as e:
+            logger.error(f"Failed to connect to MiSTer")
+            retries += 1
+            initialize()
+
+def reconnect():
+    global retries
+    retries = 0
+    initialize()
+
+def send_command(command):
+    try:
+        return ssh_session.send_command(command)
+    except Exception as e:
+        if SETTINGS['mister']["reconnect"]:
+            reconnect()
+        else:
+            return ""
 
 def build_system_map():
-    stdout = ssh_session.send_command('find /media/fat -type f -name "*.rbf"')
+    stdout = send_command('find /media/fat -type f -name "*.rbf"')
     stdout.sort()
     cores = {}
     for line in stdout:
@@ -121,7 +155,7 @@ def get_map(corename):
 
 def get_running_core():
     try:
-        stdout = ssh_session.send_command("ps aux | grep [r]bf")
+        stdout = send_command("ps aux | grep [r]bf")
         current_core = 'menu'
         for line in stdout:
             if '.rbf' in line:
@@ -144,9 +178,9 @@ def get_running_core():
 def get_file_hash(filepath, filename):
     stdout = ""
     if ".zip" in filepath:
-        stdout = ssh_session.send_command(f'unzip -p "../media/{filepath}" "{filename}" | sha1sum')
+        stdout = send_command(f'unzip -p "../media/{filepath}" "{filename}" | sha1sum')
     else:
-        stdout = ssh_session.send_command(f'sha1sum "../media/{filepath}/{filename}"')
+        stdout = send_command(f'sha1sum "../media/{filepath}/{filename}"')
     if len(stdout) > 0:
         return stdout[0].split()[0].upper()
     return ""
@@ -160,7 +194,9 @@ def get_last_game(core):
         return False
     last_game = "","",""
     try:
-        processes = ssh_session.send_command("ps aux | grep [r]bf")
+        processes = ""
+        processes = send_command("ps aux | grep [r]bf")
+
         for line in processes:
             if ".mra" in line:
                 last_game = line.split('/')[-1].replace('.mra','').strip()
@@ -170,11 +206,11 @@ def get_last_game(core):
                 return last_game,filepath,filename
             else:
                 timeframe = 0.15 * int(SETTINGS['mister']['refresh_rate'])
-                last_changed = ssh_session.send_command(f'find /media/fat/config/ -mmin -{timeframe}')
+                last_changed = send_command(f'find /media/fat/config/ -mmin -{timeframe}')
                 if len(last_changed) > 0:
                     for line in last_changed:
                         if not ignore(line):
-                            recent = ssh_session.send_command('strings {}'.format(line.strip()))
+                            recent = send_command('strings {}'.format(line.strip()))
                             if len(recent) > 0:
                                 if ".ini" not in recent[1]:
                                     return pathlib.Path(recent[1].strip()).stem,recent[0].strip()[3:],recent[1].strip()
@@ -242,29 +278,7 @@ def publish():
                 threading.Thread(target=event_manager.manage_event, args=[event]).start()
             except Exception as e:
                 logger.error(f"Unable to publish MisterGameChange event")
-
-def initialize():
-    global connected
-    global ssh_session
-    global retries
-    if retries < max_retries:
-        try:
-            ipaddress = SETTINGS['mister']['ipaddress']
-            username = SETTINGS['mister']['username']
-            password = SETTINGS['mister']['password']
-            port = SETTINGS['mister']['port']
-            ssh_session = ssh.SshConnection(ipaddress,port,username,password)
-            ssh_session.connect()
-            logger.info("Connected to MiSTer")
-            merge_maps()
-            load_map_to_memory()
-            connected = True
-        except Exception as e:
-            logger.error(f"Failed to connect to MiSTer")
-            retries += 1
-            initialize()
-
-
+    
 event_manager.publishers["MiSTer"] = {}
 event_manager.publishers["MiSTer"]["initialize"] = lambda:initialize()
 event_manager.publishers["MiSTer"]["publish"] = lambda:publish()

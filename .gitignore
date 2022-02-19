@@ -129,6 +129,7 @@ dmypy.json
 
 mister.json.bak
 retroarch.json.bak
+pubsub.json
 config.json
 main.spec
 DatabaseManager.spec

@@ -28,12 +28,9 @@ class SshConnection:
 
 
     def send_command(self,command):
-        try:
-            stdin, stdout, stderr = self.client.exec_command(command)
-            stdout=stdout.readlines()
-            return stdout
-        except SSHException as e:
-            logger.error(repr(e))
+        stdin, stdout, stderr = self.client.exec_command(command)
+        stdout=stdout.readlines()
+        return stdout
 
 
 if __name__ == "__main__":

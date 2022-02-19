@@ -1,0 +1,38 @@
+{
+    "publishers": {
+        "MiSTer": {
+            "description": "Connect to MiSTer every x seconds and publish events",
+            "status": "disabled",
+            "type": "schedule"
+        },
+        "Retroarch": {
+            "description": "Get Retroarch game details every x seconds and publish events",
+            "status": "disabled",
+            "type": "schedule"
+        },
+        "Steam": {
+            "description": "Get Steam game details every x seconds and publish events",
+            "status": "disabled",
+            "type": "schedule"
+        }
+    },
+    "subscribers": {
+        "OBS": {
+            "status": "disabled",
+            "subscribed_events": []
+        },
+        "Script": {
+            "status": "disabled",
+            "subscribed_events": []
+        },
+        "Dashboard": {
+            "status": "disabled",
+            "subscribed_events": []
+        },
+        "Discord": {
+            "status": "disabled",
+            "type": "async",
+            "subscribed_events": []
+        }
+    }
+}

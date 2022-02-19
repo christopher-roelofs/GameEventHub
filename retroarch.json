@@ -1,42 +1,83 @@
 {
-    "gambatte - Copy": {},
     "gambatte": {
         "system": "Nintendo Game Boy"
     },
-    "genesis_plus_gx": {},
-    "handy": {},
-    "mednafen_ngp": {},
-    "mednafen_pce_fast": {},
-    "mednafen_pce": {},
+    "genesis_plus_gx": {
+        "system": "Sega Genesis/Mega Drive"
+    },
+    "handy": {
+        "system": "Atari Lynx"
+    },
+    "mednafen_ngp": {
+        "system": "SNK Neo Geo Pocket Color"
+    },
+    "mednafen_pce_fast": {
+        "system": "NEC PC Engine/TurboGrafx-16"
+    },
+    "mednafen_pce": {
+        "system": "NEC PC Engine/TurboGrafx-16"
+    },
     "mednafen_psx_hw": {
         "system": "Sony PlayStation"
     },
-    "mednafen_wswan": {},
+    "mednafen_wswan": {
+        "system": "Bandai WonderSwan Color"
+    },
     "mgba": {
         "system": "Nintendo Game Boy Advance"
     },
-    "mupen64plus_next": {},
-    "prosystem": {},
-    "snes9x": {},
-    "stella": {},
+    "mupen64plus_next": {
+        "system": "Nintendo 64"
+    },
+    "prosystem": {
+        "system": "Atari 7800"
+    },
+    "snes9x": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "stella": {
+        "system": "Atari 2600"
+    },
     "2048": {},
     "81": {},
-    "a5200": {},
+    "a5200": {
+        "system": "Atari 5200"
+    },
     "atari800": {},
     "bk": {},
-    "blastem": {},
-    "bluemsx": {},
+    "blastem": {
+        "system": "Sega Genesis/Mega Drive"
+    },
+    "bluemsx": {
+        "ssytem": "Microsoft MSX2"
+    },
     "boom3": {},
     "boom3_xp": {},
-    "bsnes2014_accuracy": {},
-    "bsnes2014_balanced": {},
-    "bsnes2014_performance": {},
-    "bsnes_cplusplus98": {},
-    "bsnes_hd_beta": {},
+    "bsnes2014_accuracy": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes2014_balanced": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes2014_performance": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes_cplusplus98": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes_hd_beta": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
     "bsnes": {},
-    "bsnes_mercury_accuracy": {},
-    "bsnes_mercury_balanced": {},
-    "bsnes_mercury_performance": {},
+    "bsnes_mercury_accuracy": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes_mercury_balanced": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "bsnes_mercury_performance": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
     "cannonball": {},
     "cap32": {},
     "cdi2015": {},
@@ -46,89 +87,177 @@
     "craft": {},
     "crocods": {},
     "desktop": {},
-    "desmume2015": {},
-    "desmume": {},
+    "desmume2015": {
+        "system": "Nintendo DS"
+    },
+    "desmume": {
+        "system": "Nintendo DS"
+    },
     "dinothawr": {},
-    "dolphin": {},
+    "dolphin": {
+        "system": "Nintendo GameCube"
+    },
     "dosbox_core": {},
     "dosbox_pure": {},
     "dosbox_svn": {},
-    "duckstation": {},
+    "duckstation": {
+        "system": "Sony PlayStation"
+    },
     "easyrpg": {},
     "ecwolf": {},
-    "fbalpha2012_cps1": {},
-    "fbalpha2012_cps2": {},
-    "fbalpha2012_cps3": {},
-    "fbalpha2012": {},
-    "fbalpha2012_neogeo": {},
-    "fbalpha": {},
-    "fbneo": {},
-    "fceumm": {},
-    "fixgb": {},
-    "fixnes": {},
+    "fbalpha2012_cps1": {
+        "system": "Arcade"
+    },
+    "fbalpha2012_cps2": {
+        "system": "Arcade"
+    },
+    "fbalpha2012_cps3": {
+        "system": "Arcade"
+    },
+    "fbalpha2012": {
+        "system": "Arcade"
+    },
+    "fbalpha2012_neogeo": {
+        "system": "SNK Neo Geo"
+    },
+    "fbalpha": {
+        "system": "Arcade"
+    },
+    "fbneo": {
+        "system": "Arcade"
+    },
+    "fceumm": {
+        "system": "Nintendo Entertainment System"
+    },
+    "fixgb": {
+        "system": "Nintendo Game Boy"
+    },
+    "fixnes": {
+        "system": "Nintendo Entertainment System"
+    },
     "flycast": {},
-    "fmsx": {},
+    "fmsx": {
+        "system": "Microsoft MSX"
+    },
     "freechaf": {},
-    "freeintv": {},
-    "frodo": {},
+    "freeintv": {
+        "system": "Intellivision"
+    },
+    "frodo": {
+        "system": "Commodore 64"
+    },
     "fuse": {},
-    "gearboy": {},
-    "gearcoleco": {},
-    "gearsystem": {},
-    "genesis_plus_gx_wide": {},
+    "gearboy": {
+        "system": "Nintendo Game Boy"
+    },
+    "gearcoleco": {
+        "system": "Coleco ColecoVision"
+    },
+    "gearsystem": {
+        "system": "Sega Master System"
+    },
+    "genesis_plus_gx_wide": {
+        "system": "Sega Genesis/Mega Drive"
+    },
     "gme": {},
     "gong": {},
-    "gpsp": {},
+    "gpsp": {
+        "system": "Nintendo Game Boy Advance"
+    },
     "gw": {},
     "hatari": {},
     "jaxe": {},
     "kronos": {},
     "lowresnx": {},
     "lutro": {},
-    "mame2000": {},
-    "mame2003": {},
-    "mame2003_midway": {},
-    "mame2003_plus": {},
-    "mame2010": {},
-    "mame": {},
-    "mednafen_gba": {},
-    "mednafen_lynx": {},
-    "mednafen_pcfx": {},
-    "mednafen_psx": {},
+    "mame2000": {
+        "system": "Arcade"
+    },
+    "mame2003": {
+        "system": "Arcade"
+    },
+    "mame2003_midway": {
+        "system": "Arcade"
+    },
+    "mame2003_plus": {
+        "system": "Arcade"
+    },
+    "mame2010": {
+        "system": "Arcade"
+    },
+    "mame": {
+        "system": "Arcade"
+    },
+    "mednafen_gba": {
+        "system": "Nintendo Game Boy Advance"
+    },
+    "mednafen_lynx": {
+        "system": "Atari Lynx"
+    },
+    "mednafen_pcfx": {
+        "system": "NEC PC-FX"
+    },
+    "mednafen_psx": {
+        "system": "Sony PlayStation"
+    },
     "mednafen_saturn": {},
-    "mednafen_snes": {},
-    "mednafen_supafaust": {},
-    "mednafen_supergrafx": {},
-    "mednafen_vb": {},
-    "melonds": {},
-    "mesen-s": {},
-    "mesen": {},
+    "mednafen_snes": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "mednafen_supafaust": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "mednafen_supergrafx": {
+        "system": "NEC PC Engine CD/TurboGrafx-CD"
+    },
+    "mednafen_vb": {
+        "system": "Nintendo Virtual Boy"
+    },
+    "melonds": {
+        "system": "Nintendo DS"
+    },
+    "mesen-s": {
+        "system": "Nintendo Entertainment System"
+    },
+    "mesen": {
+        "system": "Nintendo Entertainment System"
+    },
     "meteor": {},
     "minivmac": {},
     "mrboom": {},
     "mu": {},
     "nekop2": {},
     "neocd": {},
-    "nestopia": {},
+    "nestopia": {
+        "system": "Nintendo Entertainment System"
+    },
     "np2kai": {},
     "nxengine": {},
     "o2em": {},
     "oberon": {},
     "opera": {},
-    "parallel_n64": {},
+    "parallel_n64": {
+        "system": "Nintendo 64"
+    },
     "pcsx2": {},
-    "pcsx_rearmed": {},
+    "pcsx_rearmed": {
+        "system": "Sony PlayStation"
+    },
     "picodrive": {},
     "play": {},
     "pocketcdg": {},
     "pokemini": {},
     "potator": {},
-    "ppsspp": {},
+    "ppsspp": {
+        "system": "Sony PlayStation Portable"
+    },
     "prboom": {},
     "puae": {},
     "px68k": {},
     "quasi88": {},
-    "quicknes": {},
+    "quicknes": {
+        "system": "Nintendo Entertainment System"
+    },
     "race": {},
     "reminiscence": {},
     "retro8": {},
@@ -136,21 +265,37 @@
     "sameduck": {},
     "scummvm": {},
     "smsplus": {},
-    "snes9x2002": {},
-    "snes9x2005": {},
-    "snes9x2005_plus": {},
-    "snes9x2010": {},
+    "snes9x2002": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "snes9x2005": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "snes9x2005_plus": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
+    "snes9x2010": {
+        "system": "Nintendo Super Nintendo Entertainment System"
+    },
     "squirreljme": {},
     "stella2014": {},
-    "swanstation": {},
-    "tgbdual": {},
+    "swanstation": {
+        "system": "Sony PlayStation"
+    },
+    "tgbdual": {
+        "system": "Nintendo Game Boy"
+    },
     "theodore": {},
     "thepowdertoy": {},
     "tic80": {},
     "tyrquake": {},
     "uzem": {},
-    "vbam": {},
-    "vba_next": {},
+    "vbam": {
+        "system": "Nintendo Game Boy Advance"
+    },
+    "vba_next": {
+        "system": "Nintendo Game Boy Advance"
+    },
     "vecx": {},
     "vemulator": {},
     "vice_x128": {},
