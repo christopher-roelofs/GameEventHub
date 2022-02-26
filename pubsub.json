@@ -163,7 +163,7 @@
             ]
         },
         "Discord": {
-            "status": "disabled",
+            "status": "enabled",
             "type": "async",
             "subscribed_events": [
                 {

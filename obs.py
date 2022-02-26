@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
-from platform import release
 from urllib import request
-from obswebsocket import obsws, requests  # noqa: E402
+from obswebsocket import obsws, requests
 import logger
 import config
 import event_manager
@@ -22,6 +20,24 @@ max_retries = 3
 
 retries = 0
 
+def initialize():
+    global retries
+    global ws
+    global connected
+    if retries < max_retries:
+        try:
+            logger.info("Attempting to connect to OBS ...")
+            ws = obsws(SETTINGS['obs']['host'], int(
+                SETTINGS['obs']['port']), SETTINGS['obs']['password'])
+            ws.connect()
+            connected = True
+            logger.info("Connected to OBS")
+        except Exception as e:
+            logger.error("Failed to connect to OBS: {}".format(repr(e)))
+            retries += 1
+            sleep(1)
+            initialize()
+
 
 def obs_call(call):
     try:
@@ -30,9 +46,9 @@ def obs_call(call):
         logger.error("Error making OBS call: {}.".format(repr(e)))
 
 
+
 def disconnect():
     ws.disconnect()
-
 
 def get_current_scene():
     scenes = obs_call(requests.GetSceneList())
@@ -125,29 +141,9 @@ def setSceneItemProperty(name, property, value):
 def change_scene(name):
     try:
         logger.event("Switching to {}".format(name))
-        ws.call(requests.SetCurrentScene(name))
+        obs_call(requests.SetCurrentScene(name))
     except Exception as e:
         logger.error("Unable to scene to {}: {}".format(name, repr(e)))
-
-
-def initialize():
-    global retries
-    global ws
-    global connected
-    if retries < max_retries:
-        try:
-            logger.info("Attempting to connect to OBS ...")
-            ws = obsws(SETTINGS['obs']['host'], int(
-                SETTINGS['obs']['port']), SETTINGS['obs']['password'])
-            ws.connect()
-            connected = True
-            logger.info("Connected to OBS")
-        except Exception as e:
-            logger.error("Failed to connect to OBS: {}".format(repr(e)))
-            retries += 1
-            sleep(1)
-            initialize()
-
 
 def handle_event(event, action):
     if connected:

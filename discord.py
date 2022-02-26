@@ -15,22 +15,6 @@ max_retries = 3
 
 RPC = None
 
-
-def update_activity(details, state, large_image=None, large_text=None, small_image=None, small_text=None, buttons=None):
-    if state == "":
-        state = None
-    if large_image == "":
-        large_image = None
-    if large_text == "":
-        large_text = None
-    if small_image == "":
-        small_image = None
-    if small_text == "":
-        small_text = None
-    RPC.update(details=details, state=state, start=time.time(), large_image=large_image, large_text=large_text,
-               small_image=small_image, small_text=small_text, buttons=buttons)  # Set the presence
-
-
 def initialize():
     global RPC
     global retries
@@ -48,9 +32,30 @@ def initialize():
             sleep(1)
             initialize()
 
+def update_activity(details, state, large_image=None, large_text=None, small_image=None, small_text=None, buttons=None):
+    if state == "":
+        state = None
+    if large_image == "":
+        large_image = None
+    if large_text == "":
+        large_text = None
+    if small_image == "":
+        small_image = None
+    if small_text == "":
+        small_text = None
+    try:
+        RPC.update(details=details, state=state, start=time.time(), large_image=large_image, large_text=large_text,
+                small_image=small_image, small_text=small_text, buttons=buttons)  # Set the presence
+    except Exception as e:
+        logger.error(f"Faild to update Discord status: {e}")
+        if "reconnect" in SETTINGS["discord"]:
+            if SETTINGS["discord"]["reconnect"]:
+                global retries
+                retries = 0
+                initialize()
+
 
 def handle_event(event, action):
-    global RPC
     if connected:
         buttons = None
         if "buttons" in action:

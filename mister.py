@@ -84,8 +84,11 @@ def send_command(command):
     try:
         return ssh_session.send_command(command)
     except Exception as e:
-        if SETTINGS['mister']["reconnect"]:
-            reconnect()
+        if "reconnect" in SETTINGS['mister']:
+            if SETTINGS['mister']["reconnect"]:
+                reconnect()
+            else:
+                return ""
         else:
             return ""
 
