@@ -71,7 +71,7 @@ def initialize():
             load_map_to_memory()
             connected = True
         except Exception as e:
-            logger.error(f"Failed to connect to MiSTer")
+            logger.error(f"Failed to connect to MiSTer - {e}")
             retries += 1
             initialize()
 

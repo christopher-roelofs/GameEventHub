@@ -28,6 +28,7 @@
     "BlackWidow": {
         "description": "BlackWidow core"
     },
+    "Blockade": {},
     "BombJack": {
         "description": "BombJack core"
     },
@@ -355,6 +356,7 @@
     "jtlabrun": {
         "description": "jtlabrun core"
     },
+    "jtmidres": {},
     "jtmikie": {
         "description": "jtmikie core"
     },
@@ -402,6 +404,7 @@
         "description": "jtsf core",
         "system": "Arcade"
     },
+    "jtslyspy": {},
     "jttora": {
         "description": "jttora core"
     },
@@ -486,6 +489,7 @@
     "Laser310": {
         "description": "Laser310 core"
     },
+    "Lynx48": {},
     "MSX": {
         "description": "MSX core",
         "system": "MSX"

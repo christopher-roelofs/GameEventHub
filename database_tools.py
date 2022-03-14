@@ -275,4 +275,4 @@ def neogeo_to_patch():
 
 
 if __name__ == "__main__":
-    import_patch2("import/seed/openvgdb.json")
+    import_patch("import/seed/neogeo.json")
