@@ -19,7 +19,8 @@ Config
         "password": "1",
         "port":"22",
         "refresh_rate": "1",
-        "core_storage": "fat"
+        "core_storage": "fat",
+        "reconnect": true
     },
     "obs": {
         "host": "localhost",
@@ -27,7 +28,8 @@ Config
         "password": ""
     },
     "discord": {
-        "application_id":""
+        "application_id":"",
+        "reconnect":true
     },
     "dashboard": {
         "host":"0.0.0.0",
@@ -228,6 +230,7 @@ MiSTer Config
 | port| 22  |  ssh port   
 | refresh_rate  |  1 |  polling rate of checking the core and game 
 | core_storage  | fat or usbx   |  where the cores are stored fat for sd card and usbX for usb 
+| reconnect  | true/false   |  reconnect to mister if failed to connect after initail retries
 
 ```json
 "mister": {
@@ -236,7 +239,8 @@ MiSTer Config
 "password": "1",
 "port": "22",
 "refresh_rate": 1,
-"core_storage": "fat"
+"core_storage": "fat",
+"reconnect":true
 }
 ```
 
@@ -516,10 +520,12 @@ Discord Config
  Config | Example  | Details   |
 | ------------ | ------------ | ------------ 
 | application_id|  1234567890| Discord application id 
+| reconnect  | true/false   |  reconnect to discord if failed to connect after initail retries
 
 ```json
   "discord": {
-        "application_id":""
+        "application_id":"",
+        "reconnect":true
     }
 ```
 
