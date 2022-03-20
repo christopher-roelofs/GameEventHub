@@ -500,6 +500,37 @@ This action allows you to set the url of a browser source. The url and source va
 }
 ```
 
+ObsSetSourceFilterVisibility
+
+This action allows you to set the visibility of a source filter.
+
+```json
+{
+   "description":"",
+   "status":"enabled",
+   "action":"ObsSetSourceFilterVisibility",
+   "source":"{}",
+   "filter":"{}",
+   "visible": false
+}
+```
+
+ObsSetSourceFilterSettings
+
+This action allows you to set the settings for a source filter. Settings is an object that can have multiple settings for the specified filter. Numbers seem to be floats and settings names are lowercase with spaces replaced with underscore. You can check the [source](https://github.com/obsproject/obs-studio/tree/master/plugins/obs-filters) of the filter to see the setting names. The settings object is passed directly so you can play with the types and names to get it to work. The setting is not always reflected in the UI in real time in the setting menu so close the menu and reopen after a change to see if it has been changed successfully.
+
+```json
+{
+   "description":"",
+   "status":"enabled",
+   "action":"ObsSetSourceFilterSettings",
+   "source":"CaptureCard",
+   "filter":"Compressor",
+   "settings": {"threashold":-12.0}
+}
+```
+
+
 ## [Discord Rich Presense](https://discord.com/developers/docs/intro)
 
 ![image](https://user-images.githubusercontent.com/1930031/153929599-6ceeb88a-c99e-47cb-9f7b-aa75468b6e49.png)
