@@ -2,9 +2,11 @@ import os
 import xmltodict
 import json
 import sqlite3
-from tinydb import TinyDB, Query, database
+from tinydb import TinyDB, Query
 import pathlib
 import uuid
+from database import Rom
+
 
 systems = ["Arcade", "Atari 2600", "Atari 5200", "Atari 7800", "Atari Lynx", "Bandai WonderSwan", "Bandai WonderSwan Color", "Coleco ColecoVision", "GCE Vectrex", "Intellivision",
            "NEC PC Engine/TurboGrafx-16", "NEC PC Engine CD/TurboGrafx-CD", "NEC PC-FX", "NEC SuperGrafx", "Nintendo Famicom Disk System", "Nintendo Game Boy", "Nintendo Game Boy Advance",
@@ -126,6 +128,33 @@ def openvgdb_to_patch():
 
     with open('import/seed/openvgdb.json', 'w') as outjson:
         json.dump(modb, outjson, indent=4)
+
+def no_into_game_gear_to_patch():
+    f = open('import\seed\openvgdb.json')
+    f = json.load(f)
+    roms = []
+    with open(f'dats/Sega - Game Gear (20220110-000545).dat') as fd:
+        doc = xmltodict.parse(fd.read())
+        for game in doc["datafile"]["game"]:
+            sha1 = ""
+            if "@sha1" in game["rom"]:
+                sha1 = game["rom"]["@sha1"]
+            rom = vars(Rom())
+            rom["rom_extensionless_file_name"] = game["@name"]
+            rom["sha1"] = sha1.upper()
+            rom["uuid"] = generate_uuid()
+            rom["release_name"] = game["@name"]
+            rom["system"] = "Sega Game Gear"
+            for item in f:
+                if sha1.upper() == item["sha1"]:
+                    rom = item
+            roms.append(rom)
+                    
+    with open('import/seed/no_into_game_gear.json', 'w') as outjson:
+        json.dump(roms, outjson, indent=4)
+
+
+            
 
 
 def mra_to_patch():
@@ -275,4 +304,5 @@ def neogeo_to_patch():
 
 
 if __name__ == "__main__":
-    import_patch("import/seed/neogeo.json")
+    import_patch2("import/seed/no_into_game_gear.json")
+    #no_into_game_gear_to_patch()

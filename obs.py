@@ -6,7 +6,7 @@ from obswebsocket import obsws, requests
 import logger
 import config
 import event_manager
-from string_util import replace_text
+from string_util import replace_text, replace_value
 import images
 import threading
 from time import sleep
@@ -126,6 +126,25 @@ def setSourceVolume(name, volume,useDecibel=True):
         logger.error(
             f"Unable to set volume of {name} to {volume}: {e}")
 
+def SetSourceFilterSettings(source,filter,settings):
+    try:
+        logger.event(f'Setting {source} filter {filter} settings to {settings}')
+        response = obs_call(requests.SetSourceFilterSettings(source,filter,settings))
+        if not response.status:
+            logger.error(
+            f"Unable to set {source} filter {filter} settings to {settings}: {response.datain}")
+    except Exception as e:
+        logger.error(
+            f"Unable to set {source} filter {filter} settings to {settings}: {e}")
+
+
+def SetSourceFilterVisibility(source,filter,visible):
+    try:
+        logger.event(f'Setting {source} filter {filter} visibility to {visible}')
+        obs_call(requests.SetSourceFilterVisibility(source,filter,visible))
+    except Exception as e:
+        logger.error(
+            f"Unable to set {source} filter {filter} visibility to {visible}: {e}")
 
 def setSceneItemProperty(name, property, value):
     try:
@@ -185,6 +204,26 @@ def handle_event(event, action):
             else:
                 logger.error(f"Source {source} not found")
 
+        if action['action'] == "ObsSetSourceFilterSettings":
+            source = replace_text(action["source"], event.tokens)
+            filter = replace_text(action["filter"], event.tokens)
+            settings = replace_value(action["settings"],event.tokens)
+            if is_in_source_list(source):
+                threading.Thread(target=SetSourceFilterSettings,
+                                 args=[source,filter,settings]).start()
+            else:
+                logger.error(f"Source {source} not found")
+
+        if action['action'] == "ObsSetSourceFilterVisibility":
+            source = replace_text(action["source"], event.tokens)
+            filter = replace_text(action["filter"], event.tokens)
+            visible = action["visible"]
+            if is_in_source_list(source):
+                threading.Thread(target=SetSourceFilterVisibility,
+                                 args=[source,filter,visible]).start()
+            else:
+                logger.error(f"Source {source} not found")
+
         if action['action'] == "ObsSetSourceVolume":
             source = replace_text(action["source"], event.tokens)
             volume = replace_text(action["volume"], event.tokens)
@@ -216,7 +255,6 @@ def handle_event(event, action):
                 threading.Thread(target=change_scene, args=[scene]).start()
             else:
                 logger.error(f"Scene {scene} not found")
-
 
 event_manager.subscribers["OBS"] = {}
 event_manager.subscribers["OBS"]["initialize"] = lambda: initialize()
