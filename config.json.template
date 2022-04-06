@@ -24,14 +24,17 @@
         "reconnect":true
     },
     "dashboard": {
-        "host":"0.0.0.0",
-        "port":8080
+        "host": "0.0.0.0",
+        "port": 8080,
+        "refresh_rate": 1
     },
-    "retroarch":{
-        "install_path":"C:\\RetroArch-Win64"
+    "retroarch": {
+        "install_path": "C:\\RetroArch-Win64",
+        "refresh_rate": 1
     },
-    "steam":{
-        "api_key":"",
-        "steam_id":""
+    "steam": {
+        "api_key": "FAA4E95BE04FE7728EDE4FA3829D2D2B",
+        "steam_id": "76561198067263621",
+        "refresh_rate": 1
     }
 }
