@@ -6,6 +6,7 @@ from obswebsocket import obsws, requests
 import logger
 import config
 import event_manager
+from mister import THREADED
 from string_util import replace_text, replace_value
 import images
 import threading
@@ -19,6 +20,10 @@ connected = False
 max_retries = 3
 
 retries = 0
+THREADED = False
+if "threaded" in SETTINGS['obs']:
+    THREADED = SETTINGS['obs']['threaded']
+logger.info(f"OBS Threading set to {THREADED}")
 
 def initialize():
     global retries
@@ -169,8 +174,10 @@ def handle_event(event, action):
         if action['action'] == "ObsChangeSourceText":
             for source in action["sources"]:
                 if is_in_source_list(replace_text(source, event.tokens)):
-                    threading.Thread(target=setSourceText, args=[replace_text(
-                        source, event.tokens), replace_text(action["sources"][source], event.tokens)]).start()
+                    if THREADED:
+                        threading.Thread(target=setSourceText, args=[replace_text(source, event.tokens), replace_text(action["sources"][source], event.tokens)]).start()
+                    else:
+                        setSourceText(replace_text(source, event.tokens), replace_text(action["sources"][source], event.tokens))
                 else:
                     logger.error(
                         f"Source {replace_text(source,event.tokens)} not found")
@@ -190,8 +197,10 @@ def handle_event(event, action):
                         if "rom" in vars(event):
                             game = event.rom["rom_extensionless_file_name"]
                             release_name = event.rom["release_name"]
-                        threading.Thread(target=setSourceImage, args=[source, images.get_image(
-                            action["sources"][source], system, game, release_name)]).start()
+                        if THREADED:
+                            threading.Thread(target=setSourceImage, args=[source, images.get_image(action["sources"][source], system, game, release_name)]).start()
+                        else:
+                            setSourceImage(source, images.get_image(action["sources"][source], system, game, release_name))
                 else:
                     logger.error(f"Source {source} not found")
 
@@ -199,8 +208,10 @@ def handle_event(event, action):
             source = replace_text(action["source"], event.tokens)
             url = replace_text(action["url"], event.tokens)
             if is_in_source_list(source):
-                threading.Thread(target=setBrowserSourceUrl,
-                                 args=[source, url]).start()
+                if THREADED:
+                    threading.Thread(target=setBrowserSourceUrl,args=[source, url]).start()
+                else:
+                    setBrowserSourceUrl(source, url)
             else:
                 logger.error(f"Source {source} not found")
 
@@ -209,8 +220,10 @@ def handle_event(event, action):
             filter = replace_text(action["filter"], event.tokens)
             settings = replace_value(action["settings"],event.tokens)
             if is_in_source_list(source):
-                threading.Thread(target=SetSourceFilterSettings,
-                                 args=[source,filter,settings]).start()
+                if THREADED:
+                    threading.Thread(target=SetSourceFilterSettings,args=[source,filter,settings]).start()
+                else:
+                    SetSourceFilterSettings(source,filter,settings)
             else:
                 logger.error(f"Source {source} not found")
 
@@ -219,8 +232,10 @@ def handle_event(event, action):
             filter = replace_text(action["filter"], event.tokens)
             visible = action["visible"]
             if is_in_source_list(source):
-                threading.Thread(target=SetSourceFilterVisibility,
-                                 args=[source,filter,visible]).start()
+                if THREADED:
+                    threading.Thread(target=SetSourceFilterVisibility,args=[source,filter,visible]).start()
+                else:
+                    SetSourceFilterVisibility(source,filter,visible)
             else:
                 logger.error(f"Source {source} not found")
 
@@ -234,8 +249,10 @@ def handle_event(event, action):
 
             try:
                 if is_in_source_list(source):
-                    threading.Thread(target=setSourceVolume, args=[
-                                    source, float(volume),use_db]).start()
+                    if THREADED:
+                        threading.Thread(target=setSourceVolume, args=[source, float(volume),use_db]).start()
+                    else:
+                        setSourceVolume(source, float(volume),use_db)
                 else:
                     logger.error(f"Source {source} not found")
             except Exception as e:
@@ -244,15 +261,20 @@ def handle_event(event, action):
         if action['action'] == "ObsSetItemProperty":
             source = replace_text(action["source"], event.tokens)
             if is_in_source_list(source):
-                threading.Thread(target=setSceneItemProperty, args=[
-                                 source, action["property"], action["value"]]).start()
+                if THREADED:
+                    threading.Thread(target=setSceneItemProperty, args=[source, action["property"], action["value"]]).start()
+                else:
+                    setSceneItemProperty(source, action["property"], action["value"])
             else:
                 logger.error(f"Source {source} not found")
 
         if action['action'] == "ObsChangeScene":
             scene = replace_text(action["scene"], event.tokens)
             if is_in_scene_list(scene):
-                threading.Thread(target=change_scene, args=[scene]).start()
+                if THREADED:
+                    threading.Thread(target=change_scene, args=[scene]).start()
+                else:
+                    change_scene(scene)
             else:
                 logger.error(f"Scene {scene} not found")
 

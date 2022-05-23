@@ -12,12 +12,14 @@
         "port":"22",
         "refresh_rate": "1",
         "core_storage": "fat",
-        "reconnect": true
+        "reconnect": true,
+         "threaded": false
     },
     "obs": {
         "host": "localhost",
         "port": "4444",
-        "password": ""
+        "password": "",
+        "threaded": false
     },
     "discord": {
         "application_id":"",

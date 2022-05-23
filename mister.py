@@ -14,6 +14,11 @@ from time import sleep
 
 SETTINGS = config.get_config()
 RECENTS_FOLDER = '/media/{}/config/'.format(SETTINGS['mister']['core_storage'])
+THREADED = False
+
+if "threaded" in SETTINGS['mister']:
+    THREADED = SETTINGS['mister']['threaded']
+logger.info(f"MiSTer Threading set to {THREADED}")
 
 connected = False
 ssh_session = None
@@ -245,7 +250,11 @@ def publish():
             tokens = cores[core]
             tokens["core"] = core
             event = MisterCoreChange(system,core,tokens)
-            threading.Thread(target=event_manager.manage_event, args=[event]).start()
+            if THREADED:
+                threading.Thread(target=event_manager.manage_event, args=[event]).start()
+            else:
+                event_manager.manage_event(event)
+
 
         
         if game != "" and game != last_game:
@@ -278,7 +287,10 @@ def publish():
                 tokens.update(rom)
                 event = MisterGameChange(system,core,rom,tokens)
                 last_game = game
-                threading.Thread(target=event_manager.manage_event, args=[event]).start()
+                if THREADED:
+                    threading.Thread(target=event_manager.manage_event, args=[event]).start()
+                else:
+                    event_manager.manage_event(event)
             except Exception as e:
                 logger.error(f"Unable to publish MisterGameChange event")
     

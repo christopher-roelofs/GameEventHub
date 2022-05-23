@@ -138,6 +138,7 @@
     "Jailbreak": {
         "description": "Jailbreak core"
     },
+    "Joust2": {},
     "LadyBug": {
         "description": "LadyBug core"
     },
@@ -168,6 +169,7 @@
     "MrDo": {
         "description": "MrDo core"
     },
+    "MysticMarathon": {},
     "NinjaKun": {
         "description": "NinjaKun core"
     },
@@ -366,6 +368,9 @@
     "jtninja": {
         "description": "jtninja core"
     },
+    "jtpinpon": {},
+    "jtrastan": {},
+    "jtroadf": {},
     "jtrumble": {
         "description": "jtrumble core"
     },
@@ -417,6 +422,7 @@
     "jtyiear": {
         "description": "jtyiear core"
     },
+    "toaplan1": {},
     "AcornAtom": {
         "description": "AcornAtom core"
     },
@@ -590,6 +596,7 @@
     "AY-3-8500": {
         "description": "AY-3-8500 Core"
     },
+    "AdventureVision": {},
     "Arcadia": {
         "description": "Arcadia core"
     },
@@ -639,6 +646,7 @@
         "description": "MegaCD Core",
         "system": "Sega CD/Mega-CD"
     },
+    "Megaduck": {},
     "NES": {
         "description": "NES Core",
         "system": "Nintendo Entertainment System"
@@ -692,6 +700,7 @@
     "GameOfLife": {
         "description": "GameOfLife core"
     },
+    "SlugCross": {},
     "TomyScramble": {
         "description": "TomyScramble core"
     },
