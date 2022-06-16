@@ -560,15 +560,7 @@ Discord Config
     }
 ```
 
-**Setup an application in Discord that will be used for this integration**
-
--   Navigate to  [https://discordapp.com/developers/](https://discordapp.com/developers/)
--   Click “Create an Application.”
--   Setup the application how you want, name in MiSTer , and give it a good image.
--   Right under the name of your application, locate your Client ID. You will need this later.
--   Lastly, save your application.
-
-in the pubsub.json file this requires an extra field for *type* because the library being use is async. 
+In the pubsub.json file this requires an extra field for *type* because the library being use is async. 
 
 ```json
 "Discord":{
