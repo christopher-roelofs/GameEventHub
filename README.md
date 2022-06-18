@@ -1,3 +1,4 @@
+
 # GameEventHub
 Game based event integrations for multiple systems
 
@@ -536,15 +537,23 @@ This action allows you to set the settings for a source filter. Settings is an o
 ![image](https://user-images.githubusercontent.com/1930031/153929599-6ceeb88a-c99e-47cb-9f7b-aa75468b6e49.png)
 
 
-For the Discord subcriber to work, you need to have the discord application install on the same machine the script is running on. This uses the RPC protocol.
+For the Discord subscriber to work, you need to have the discord application install on the same machine the script is running on. This uses the RPC protocol.
 
-**Setup an appication in Discord that will be used for this integration**
+**Setup an application in Discord that will be used for this integration**
 
 -   Navigate to  [https://discordapp.com/developers/](https://discordapp.com/developers/)
 -   Click “Create an Application.”
 -   Setup the application how you want, name in MiSTer , and give it a good image.
 -   Right under the name of your application, locate your Client ID. You will need this later.
 -   Lastly, save your application.
+
+**Note**: Check that the following steps have been completed
+
+1.  Enable at least one subscriber and one publisher in pubsub.json.
+2.  Add events in the pubsub.json for the subscriber(s), and any number of actions you wish to have trigger when the event fires. See the "Publisher/Subscriber Model" section for details, referring to the events in each publisher section and actions listed in each subscriber section for how to configure. You can have one action per event, but list the same event multiple times.
+3.  If using the Discord subscriber, make sure to upload any wanted images to the Developer portal under the "Rich Presence" assets section, and name them to match what is in your actions. If it is a dynamic item, like {core} for example, keep in mind the image names cannot have spaces. The {core} names from the MiSTer should not have spaces, so this works for them. (naming the images atarilynx or gba2p, for example) Letter case does not matter.
+4.  Run the application while Discord is running on the same machine. DiscordPTB and Nightly are not supported. It should automatically connect to Discord, and start listening for the enabled publisher(s).
+
 
 Discord Config
 
